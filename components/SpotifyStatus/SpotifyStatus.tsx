@@ -66,7 +66,7 @@ const SpotifyStatus: React.FC<{
       } catch (error) {
         setOffline(true);
       }
-    }, 15000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -77,8 +77,10 @@ const SpotifyStatus: React.FC<{
   // }
 
   const scrollingText =
-    !offline && result.isPlaying
-      ? `${result.title} by ${result.artist}`
+    !offline && result.title && result.artist
+      ? result.isPlaying
+        ? `${result.title} by ${result.artist}`
+        : `Paused: ${result.title} by ${result.artist}`
       : "Sorry, not listening to Spotify right now. Check again later.";
 
   return (
